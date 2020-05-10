@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "automate.h"
+#include "automate.c"
 #include "printAuto.h"
 
 
@@ -33,7 +33,7 @@ void printEtats(struct automate autom){
 		}
 		printf("%d",autom.Q[e].index);
 		if(autom.Q[e].final)printf("+");else printf(" ");
-		printf(" :\n\n");
+		printf(" :\n");
 		//print transition
 		printTransition(autom,&autom.Q[e]);
 	}
@@ -45,6 +45,7 @@ void printTransition(struct automate autom,struct etat * state){
 		printf("%d|",t);
 		printBinary(state->transi[t],autom.A);
 	}
+	printf("\n");
 }
 void printBinary(int num,alphabet alpha){
 	for(int b=0;b<AlphaLength(alpha);b++){

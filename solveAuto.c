@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdio.h>
-#include "automate.h"
+#include "automate.c"
 #include "solveAuto.h"
 
 bool solveAuto(struct automate autom,char mot []){
@@ -37,13 +37,11 @@ bool _IsInAutomate(struct automate autom,struct etat current,char mot[],int cpt)
 	if(cpt==strlen(mot)){
 		return current.final;
 	}
-	printf("%d:\n%d->%c",cpt,current.index,mot[cpt]);
 	return _IsInAutomate(autom,getNextState(autom,current,mot[cpt]),mot,cpt+1);
 }
 struct etat getNextState(struct automate autom,struct etat state,char letter){
 	trans letterMasque = LetterToBinaryVector(autom.A,letter);
 	for(int t = 0;t<5;t++){
-		printf("%d&%d",state.transi[t],letterMasque);
 		if(state.transi[t]&letterMasque != 0){
 			return autom.Q[t];
 		}
@@ -51,15 +49,4 @@ struct etat getNextState(struct automate autom,struct etat state,char letter){
 	struct etat null;
 	null.index=-1;
 	return null;
-}
-trans LetterToBinaryVector(alphabet alpha,char letter){
-	trans tmptrans=0;
-	for(int al =0;al<8;al++){
-		if(alpha[al]==letter){
-			tmptrans++;
-		}
-		tmptrans <<1;
-	}
-	printf(">%d<",tmptrans);
-	return tmptrans;
 }

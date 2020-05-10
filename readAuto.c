@@ -3,9 +3,21 @@
 #include <stdio.h>
 
 #include "readAuto.h"
-
-struct automate * readAuto(char filename[])
-{
+int decaleLine(FILE * file,int VOffset){
+	fseek(file,0,SEEK_SET);
+	int res = 0;
+	for (int i = 0; i < VOffset; i++)
+	{
+		char tmpchar;
+		do{
+			res++;
+			tmpchar = fgetc(file);
+		}while ( tmpchar !='\n');
+	};
+	return res;
+	
+}
+struct automate * readAuto(char filename[]){
 	struct automate *res;
 	res = malloc(sizeof(struct automate));
 	FILE *file = fopen(filename,"a+");
@@ -17,7 +29,6 @@ struct automate * readAuto(char filename[])
 	setTransition(file,res);
 	return res;
 }
-
 void getAlphabet(FILE *file,struct automate *autom){
 	fgets(autom->A,8,file);
 	bool checker = false;
@@ -30,7 +41,6 @@ void getAlphabet(FILE *file,struct automate *autom){
 		}
 	}
 }
-
 void setInitial(FILE *file,struct automate *autom){
 	char buffer[1];
 	fgets(buffer,1,file);
@@ -47,25 +57,18 @@ void setFinal(FILE *file, struct automate *autom){
 }
 void setTransition(FILE *file, struct automate *autom){
 	char buffer[50];
+	fseek(file,decaleLine(file,3),SEEK_SET);
 	for(int i = 0; i< 5; i++){
 		for (int t = 0; t < 5;t++){
-			char readBuff= fgetc(file);
-			trans tmptrans = 0;
-			int alphacount = 0;
-			while(readBuff!=';' && readBuff!='\n'){
-				while(readBuff != autom->A[alphacount]){
-					tmptrans<<1;
-					alphacount++;
-				}
-				tmptrans++;
-				readBuff = fgetc(file);
-			}
-			while(alphacount < 8){
-				tmptrans<<1;
-				alphacount ++;
-			}
-			autom->Q[i].transi[t]=tmptrans;
+			autom->Q[i].transi[t]=0;
+			char buffer =fgetc(file);
+			while(buffer != '\n' && buffer != ';'){
+				autom->Q[i].transi[t]= autom->Q[i].transi[t]|LetterToBinaryVector(autom->A,buffer);
+				buffer =fgetc(file);
+				
 		}
+			}
+			
 	}
 }
 
