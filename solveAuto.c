@@ -42,9 +42,10 @@ bool _IsInAutomate(struct automate autom,struct etat current,char mot[],int cpt)
 struct etat getNextState(struct automate autom,struct etat state,char letter){
 	trans letterMasque = LetterToBinaryVector(autom.A,letter);
 	for(int t = 0;t<5;t++){
-		if(state.transi[t]&letterMasque != 0){
+		if((state.transi[t]&letterMasque) != (trans)0){
 			return autom.Q[t];
 		}
+		
 	}
 	struct etat null;
 	null.index=-1;
