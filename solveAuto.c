@@ -1,6 +1,10 @@
 #include <string.h>
 #include <stdio.h>
-#include "automate.c"
+
+#include "automate.h"
+#include "formatChecker.h"
+#include "readAuto.h"
+#include "printAuto.h"
 #include "solveAuto.h"
 
 bool solveAuto(struct automate autom,char mot []){
@@ -45,7 +49,6 @@ struct etat getNextState(struct automate autom,struct etat state,char letter){
 		if((state.transi[t]&letterMasque) != (trans)0){
 			return autom.Q[t];
 		}
-		
 	}
 	struct etat null;
 	null.index=-1;

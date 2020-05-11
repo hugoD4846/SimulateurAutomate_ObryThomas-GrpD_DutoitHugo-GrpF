@@ -1,6 +1,6 @@
 #ifndef SOLVEAUTO_H_INCLUDED
 #define SOLVEAUTO_H_INCLUDED
-bool SolveAuto(struct automate autom, char mot[]);
+bool solveAuto(struct automate autom, char mot[]);
 bool IsInAlphabet(alphabet alpha,char mot[]);
 bool LetterInAlphabet(alphabet alpha, char letter);
 bool IsInAutomate(struct automate autom,char mot[]);

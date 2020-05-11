@@ -1,10 +1,17 @@
-#include"automate.h"
+#include "automate.h"
+#include "formatChecker.h"
+#include "readAuto.h"
+#include "printAuto.h"
+#include "solveAuto.h"
+
 #include<stdio.h>
-#ifndef AUTOMATE_C_INCLUDED
-#define AUTOMATE_C_INCLUDED
 void setEtat(struct automate *autom){
         for(int i = 0; i < 5;i ++){
                 autom->Q[i].index = i;
+				for(int t=0; t < 5;t++){
+					autom->Q[i].final=false;
+					autom->Q[i].transi[t]=0;
+				}
         }
 }
 int AlphaLength(alphabet alpha){
@@ -30,4 +37,8 @@ trans LetterToBinaryVector(alphabet alpha,char letter){
 	return tmptrans>>1;
 	
 }
-#endif
+
+void initAuto(automate *autom){
+	setEtat(autom);
+
+}

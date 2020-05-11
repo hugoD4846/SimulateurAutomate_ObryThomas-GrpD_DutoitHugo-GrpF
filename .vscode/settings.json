@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "automate.h": "c",
+        "printauto.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c"
+    }
+}

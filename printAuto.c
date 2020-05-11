@@ -1,6 +1,11 @@
 #include <stdio.h>
-#include "automate.c"
+#include <stdbool.h>
+
+#include "automate.h"
+#include "formatChecker.h"
+#include "readAuto.h"
 #include "printAuto.h"
+#include "solveAuto.h"
 
 
 void printAuto(struct automate autom){
@@ -50,9 +55,9 @@ void printTransition(struct automate autom,struct etat * state){
 void printBinary(int num,alphabet alpha){
 	for(int b=0;b<AlphaLength(alpha);b++){
 		if (num & 1){
-        		printf("1");
+        		printf("X");
 		}else{
-        		printf("0");
+        		printf(" ");
 		}
 		num>>=1;
 		printf("|");
