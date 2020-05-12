@@ -1,8 +1,0 @@
-abcd
-0
-034
-;ad;bc;;
-;;ab;;
-;;ad;bc;
-;;;;abcd
-;abcd;;;

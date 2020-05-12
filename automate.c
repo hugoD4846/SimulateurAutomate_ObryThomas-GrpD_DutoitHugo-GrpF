@@ -5,6 +5,7 @@
 #include "solveAuto.h"
 
 #include<stdio.h>
+// permet d'initialiser les etat d'un automate
 void setEtat(struct automate *autom){
         for(int i = 0; i < 5;i ++){
                 autom->Q[i].index = i;
@@ -14,6 +15,7 @@ void setEtat(struct automate *autom){
 				}
         }
 }
+//return la longueur de l'alphabet passer en parametre
 int AlphaLength(alphabet alpha){
 	int len = 0;
 	while(len < 8 && alpha[len]!=0){
@@ -22,6 +24,8 @@ int AlphaLength(alphabet alpha){
 	return len;
 }
 
+
+//transforme une lettre en vecteur binaire pour faciliter la resolution de l'automate
 trans LetterToBinaryVector(alphabet alpha,char letter){
 
 	trans tmptrans = 0;
@@ -37,7 +41,7 @@ trans LetterToBinaryVector(alphabet alpha,char letter){
 	return tmptrans>>1;
 	
 }
-
+// fonction principale d'initialistation d'automate
 void initAuto(automate *autom){
 	setEtat(autom);
 

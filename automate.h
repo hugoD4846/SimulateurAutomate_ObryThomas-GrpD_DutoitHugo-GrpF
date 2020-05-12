@@ -2,6 +2,7 @@
 #ifndef AUTOMATE_H_INCLUDED
 #define AUTOMATE_H_INCLUDED
 typedef char alphabet[8];
+// definition de transition 
 typedef unsigned int trans;
 
 typedef struct etat{

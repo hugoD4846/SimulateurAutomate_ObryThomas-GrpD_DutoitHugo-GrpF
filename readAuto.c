@@ -7,6 +7,7 @@
 #include "printAuto.h"
 #include "solveAuto.h"
 
+//function principale qui lit le fichier afin de le transformer en struct automate
 struct automate * readAuto(FILE *file){
 	fseek(file,0,SEEK_SET);
 	struct automate *res;
@@ -19,6 +20,7 @@ struct automate * readAuto(FILE *file){
 	setTransition(file,res);
 	return res;
 }
+//assigne un alphabet a un automate en fonction d'un automate
 void getAlphabet(FILE *file,struct automate *autom){
 	fgets(autom->A,8,file);
 	bool checker = false;
@@ -31,12 +33,14 @@ void getAlphabet(FILE *file,struct automate *autom){
 		}
 	}
 }
+//assigne un pointer initial d etat en fonction d'un fichier 
 void setInitial(FILE *file,struct automate *autom){
 	char buffer[1];
 	fseek(file,decaleLine(file,1),SEEK_SET);
 	fgets(buffer,1,file);
 	autom->Initial=&autom->Q[atoi(&buffer[0])];
 }
+// assigne un boolean final a true si l'etat est acceptant
 void setFinal(FILE *file, struct automate *autom){
 	char buffer[5];
 	fseek(file,decaleLine(file,2),SEEK_SET);
@@ -47,6 +51,7 @@ void setFinal(FILE *file, struct automate *autom){
 		}
 	}
 }
+// assigne toute les transiton en fonction des etat a partir d'un fichier 
 void setTransition(FILE *file, struct automate *autom){
 	char buffer[50];
 	fseek(file,decaleLine(file,3),SEEK_SET);
@@ -63,6 +68,8 @@ void setTransition(FILE *file, struct automate *autom){
 			
 	}
 }
+
+//permet un fseek vertical
 int decaleLine(FILE * file,int VOffset){
 	fseek(file,0,SEEK_SET);
 	int res = 0;
